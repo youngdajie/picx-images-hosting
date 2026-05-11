@@ -1,10 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PicX 图床 | 说明</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --text-color: #333;
+            --bg-color: #f4f4f4;
+        }
 
-Welcome to use PicX  欢迎使用 PicX
-PicX is a simple and powerful image hosting tool. It supports image hosting services via GitHub repository.
-PicX 是一个简单而强大的图片托管工具。它通过 GitHub 仓库支持图片托管服务。
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
 
-PicX is completely open source, and you can use it for free.
-PicX 完全开源，你可以免费使用它。
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            max-width: 600px;
+            text-align: center;
+        }
 
-If you like it, please give it a star on GitHub.
-如果你喜欢它，请在 GitHub 上给它一个星标。
+        h1 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .features {
+            text-align: left;
+            margin: 2rem 0;
+            padding-left: 1.5rem;
+            color: #666;
+        }
+
+        .features li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        .badge {
+            background: #eee;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: monospace;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🖼️ PicX 图片托管@JIE</h1>
+        
+        <p>
+            这是一个基于 <strong>GitHub Pages</strong> 构建的免费、高速、稳定的图床服务。
+            主要用于存储和分发网络图片资源。
+        </p>
+
+        <ul class="features">
+            <li>🚀 <strong>极速访问：</strong> 依托 腾讯云 EdgeOne 全球 CDN 节点加速.</li>
+            <li>🛡️ <strong>数据安全：</strong> 图片源文件存储于 GitHub 仓库，永不丢失.</li>
+            <li>🆓 <strong>完全免费：</strong> 利用 GitHub 免费额度，零成本维护.</li>
+            <li>🔗 <strong>直链支持：</strong> 提供稳定的图片直接链接，方便引用.</li>
+        </ul>
+
+        <p>
+            当前状态：<span class="badge">运行中</span>
+        </p>
+
+        <div class="footer">
+            &copy; 2026 JIE
+        </div>
+    </div>
+
+</body>
+</html>
