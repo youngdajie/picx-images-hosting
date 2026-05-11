@@ -2,104 +2,123 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <title>PicX@JIE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PicX 图床 | 说明</title>
     <style>
         :root {
-            --primary-color: #007bff;
-            --text-color: #333;
-            --bg-color: #f4f4f4;
+            --bg: #fafafa;
+            --text: #333;
+            --muted: #777;
+            --accent: #4a6cf7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
             min-height: 100vh;
-            margin: 0;
-            padding: 20px;
         }
 
-        .container {
-            background: white;
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            max-width: 600px;
-            text-align: center;
+        main {
+            max-width: 720px;
+            margin: 80px auto;
+            padding: 0 24px;
         }
 
         h1 {
-            margin-top: 0;
-            color: var(--primary-color);
-            font-size: 2rem;
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            margin-top: 48px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--accent);
         }
 
         p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
+            margin-top: 16px;
+            color: var(--muted);
+        }
+
+        ul {
+            margin-top: 16px;
+            padding-left: 20px;
         }
 
         li {
-            list-style-type: none;
+            margin-top: 10px;
+            color: var(--muted);
         }
 
-        .features {
-            text-align: left;
-            margin: 2rem 0;
-            padding-left: 1.5rem;
-            color: #666;
-        }
-
-        .features li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer {
-            margin-top: 2rem;
+        footer {
+            text-align: center;
+            padding: 40px 20px;
             font-size: 0.9rem;
-            color: #999;
+            color: #aaa;
+            margin-top: auto;
         }
-        
-        .badge {
-            background: #eee;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-family: monospace;
-            color: #555;
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>🖼️ PicX 图片托管@JIE</h1>
-        
-        <p>
-            这是一个基于 <strong>EdgeOne Pages</strong> 构建的免费、高速、稳定的图床服务<br>
-            主要用于存储和分发网络图片资源
-        </p>
+<main>
+    <h1>PicX@JIE</h1>
 
-        <ul class="features">
-            <li>🚀 <strong>极速访问：</strong> 依托 腾讯云 EdgeOne 全球 CDN 节点加速.</li>
-            <li>🛡️ <strong>数据安全：</strong> 图片源文件存储于 GitHub 仓库，永不丢失.</li>
-            <li>🍱 <strong>完全免费：</strong> 利用 GitHub 免费额度，零成本维护.</li>
-            <li>🔗 <strong>直链支持：</strong> 提供稳定的图片直接链接，方便引用.</li>
-        </ul>
+    <p>
+        一个基于 GitHub 的图床工具。没有复杂的配置，也不依赖服务器，
+        只是把图片安安静静地存好，给一个干净的链接
+    </p>
 
-        <p>
-            当前状态：<span class="badge">运行中</span>
-        </p>
+    <h2>为什么做这个</h2>
+    <p>
+        写博客、记笔记、整理文档时，图片总是件麻烦事。
+        本地图片换台设备就丢了，第三方图床又总担心哪天跑路。
+        PicX 就是把这件事变得简单、稳定、可控
+    </p>
 
-        <div class="footer">
-            &copy; 2026 JIE
-        </div>
-    </div>
+    <h2>它是怎么工作的</h2>
+    <ul>
+        <li>图片存储在 GitHub 仓库里，数据始终在自己自己手里</li>
+        <li>通过 EdgeOne Pages 分发，在全球各地都能比较快地加载</li>
+        <li>支持拖拽上传，生成的链接可以直接贴在 Markdown 里</li>
+    </ul>
+
+    <h2>适合谁用</h2>
+    <p>
+        适合那些对内容有长期保存需求的人：写作者、开发者、
+        喜欢折腾笔记的人，或者只是不想再为一张图片找半天路径的人
+    </p>
+
+    <p style="margin-top: 40px;">
+        项目开源，可在 <a href="https://github.com/youngdajie/picx-images-hosting" target="_blank">GitHub</a> 查看
+    </p>
+</main>
+
+<footer>
+    © 2026 JIE
+</footer>
 
 </body>
 </html>
+
