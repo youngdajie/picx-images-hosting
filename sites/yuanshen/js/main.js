@@ -35,12 +35,12 @@ function loadMusicScript() {
   if (typeof localMusic === 'undefined' || !Array.isArray(localMusic) || localMusic.length === 0) {
     // 如果 localMusic 为空数组或未定义，加载 Meting2.min.js
     var script = document.createElement('script');
-    script.src = './js/Meting.js';
+    script.src = '/sites/yuanshen/js/Meting.js';
     document.body.appendChild(script);
   } else {
     // 否则加载 localEngine.js
     var script = document.createElement('script');
-    script.src = './js/localEngine.js';
+    script.src = '/sites/yuanshen/js/localEngine.js';
     document.body.appendChild(script);
     local = true;
   }
@@ -350,7 +350,7 @@ var heo = {
 
       if (typeof ColorThief === 'undefined') {
         const script = document.createElement('script');
-        script.src = './js/color-thief.min.js';
+        script.src = '/sites/yuanshen/js/color-thief.min.js';
         script.onload = () => updateThemeColor(new ColorThief());
         document.body.appendChild(script);
       } else {
