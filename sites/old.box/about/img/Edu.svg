@@ -1,0 +1,23 @@
+<svg width="1066px" height="366px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1066 366">
+  <!-- 时间线 -->
+  <line x1="100" y1="183" x2="966" y2="183" stroke="#333333" stroke-width="2"/>
+  
+  <!-- 时间节点 -->
+  <circle cx="150" cy="183" r="8" fill="#333333"/>
+  <circle cx="533" cy="183" r="8" fill="#333333"/>
+  <circle cx="916" cy="183" r="8" fill="#1296db"/>
+  
+  <!-- 时间标签 -->
+  <text x="150" y="130" font-family="Arial" font-size="40" fill="#333333" text-anchor="middle">2019</text>
+  <text x="533" y="130" font-family="Arial" font-size="40" fill="#333333" text-anchor="middle">2023</text>
+  <text x="916" y="130" font-family="Arial" font-size="40" fill="#1296db" text-anchor="middle">现在</text>
+  
+  <!-- 事件描述 -->
+  <text x="150" y="250" font-family="Arial" font-size="35" fill="#666666" text-anchor="middle">
+    高中毕业 <tspan dy="5">🏫</tspan>
+  </text>
+  <text x="533" y="250" font-family="Arial" font-size="35" fill="#666666" text-anchor="middle">
+    大学毕业 <tspan dy="5">🏫</tspan>
+  </text>
+  <text x="916" y="250" font-family="Arial" font-size="35" fill="#1296db" text-anchor="middle">社畜</text>
+</svg>
