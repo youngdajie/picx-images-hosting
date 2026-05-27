@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>购车梦想计算器</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .calculator-card { background-color: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); width: 400px; }
+        h2 { text-align: center; color: #333; margin-bottom: 25px; }
+        label { display: block; margin-top: 15px; font-size: 14px; color: #666; }
+        input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; margin-top: 25px; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; transition: background 0.3s; }
+        button:hover { background-color: #0056b3; }
+        .result-area { margin-top: 20px; padding: 15px; background-color: #eef9ff; border-radius: 6px; display: none; }
+        .result-item { margin: 8px 0; font-size: 15px; color: #333; }
+        .highlight { font-weight: bold; color: #007bff; }
+    </style>
+</head>
+<body>
+
+<div class="calculator-card">
+    <h2>🚗 购车梦想计算器</h2>
+    
+    <label for="carPrice">车辆价格 (元)</label>
+    <input id="carPrice" type="number" placeholder="例如：75000" value="75000">
+
+    <label for="currentDeposit">当前存款 (元)</label>
+    <input id="currentDeposit" type="number" placeholder="输入你现在的存款">
+
+    <label for="monthlySave">预计每月能存多少钱 (元)</label>
+    <input id="monthlySave" type="number" placeholder="输入每月的固定存款">
+
+    <button onclick="calculateGoal()">开始计算</button>
+
+    <div id="resultArea" class="result-area">
+        <div class="result-item">💰 距离买车还差：<span id="gapAmount" class="highlight"></span> 元</div>
+        <div class="result-item">⏳ 预计还需要：<span id="timeNeeded" class="highlight"></span></div>
+        <div class="result-item">📅 预计达成时间：<span id="targetDate" class="highlight"></span></div>
+    </div>
+</div>
+
+<script>
+    function calculateGoal() {
+        // 1. 获取用户输入的数据
+        const carPrice = parseFloat(document.getElementById('carPrice').value) || 0;
+        const currentDeposit = parseFloat(document.getElementById('currentDeposit').value) || 0;
+        const monthlySave = parseFloat(document.getElementById('monthlySave').value) || 0;
+        
+        const resultArea = document.getElementById('resultArea');
+
+        // 2. 基础数据校验（防止出现负数或除以零的情况）
+        if (monthlySave <= 0) {
+            alert("请输入有效的每月存款金额（必须大于0）");
+            return;
+        }
+        if (currentDeposit >= carPrice) {
+            alert("恭喜你！你的存款已经足够购买这辆车了！");
+            resultArea.style.display = "none";
+            return;
+        }
+
+        // 3. 核心计算逻辑
+        const gap = carPrice - currentDeposit; // 计算资金缺口
+        const monthsNeeded = Math.ceil(gap / monthlySave); // 向上取整计算所需月份
+        
+        // 计算预计达成的具体日期
+        const now = new Date();
+        const targetDate = new Date(now.getFullYear(), now.getMonth() + monthsNeeded, now.getDate());
+        const dateStr = `${targetDate.getFullYear()}年${targetDate.getMonth() + 1}月`;
+
+        // 4. 将结果渲染到页面上
+        document.getElementById('gapAmount').textContent = gap.toFixed(2);
+        document.getElementById('timeNeeded').textContent = monthsNeeded + " 个月";
+        document.getElementById('targetDate').textContent = dateStr;
+        
+        resultArea.style.display = "block";
+    }
+</script>
+
+</body>
+</html>
