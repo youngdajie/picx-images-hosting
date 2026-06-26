@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>我的专属工资计算器</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .calculator-card { background: #fff; width: 100%; max-width: 400px; padding: 25px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        h2 { text-align: center; color: #1a1a1a; margin-top: 0; margin-bottom: 25px; font-size: 22px; }
+        .input-item { margin-bottom: 16px; }
+        .input-item label { display: block; margin-bottom: 6px; color: #555; font-size: 14px; font-weight: 500; }
+        .input-item input { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 16px; box-sizing: border-box; background: #fafafa; transition: all 0.3s; }
+        .input-item input:focus { border-color: #4a90e2; background: #fff; outline: none; box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1); }
+        .btn-calc { width: 100%; padding: 14px; background: linear-gradient(135deg, #4a90e2, #357abd); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3); transition: transform 0.1s; }
+        .btn-calc:active { transform: scale(0.98); }
+        .result-box { margin-top: 25px; background: #f8fbff; border-radius: 12px; padding: 20px; border: 1px solid #e1e9f5; display: none; }
+        .result-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; color: #666; }
+        .result-row.total { margin-top: 15px; padding-top: 15px; border-top: 1px dashed #cbd5e1; color: #1a1a1a; font-size: 18px; font-weight: bold; }
+        .highlight { color: #4a90e2; font-weight: 600; }
+        .total-val { color: #d32f2f; }
+    </style>
+</head>
+<body>
+
+<div class="calculator-card">
+    <h2>💰 综合工资计算器</h2>
+    
+    <div class="input-item">
+        <label>底薪 N (元)</label>
+        <input type="number" id="baseSalary" placeholder="输入你的底薪，如 3000">
+    </div>
+    <div class="input-item">
+        <label>当月行政天数 (标准天数)</label>
+        <input type="number" id="adminDays" placeholder="如 22">
+    </div>
+    <div class="input-item">
+        <label>实际上班天数</label>
+        <input type="number" id="workDays" placeholder="如 24">
+    </div>
+    <div class="input-item">
+        <label>夜班天数 (补贴50/晚)</label>
+        <input type="number" id="nightDays" placeholder="没有则填 0" value="0">
+    </div>
+    <div class="input-item">
+        <label>法定节假日上班天数 (3倍工资)</label>
+        <input type="number" id="holidayDays" placeholder="没有则填 0" value="0">
+    </div>
+
+    <button class="btn-calc" onclick="calculateSalary()">一键计算工资</button>
+
+    <div class="result-box" id="resultBox">
+        <div class="result-row"><span>时薪标准:</span> <span class="highlight" id="resHourly">0.00 元</span></div>
+        <div class="result-row"><span>底薪部分:</span> <span id="resBase">0.00 元</span></div>
+        <div class="result-row"><span>平时加班费 (1.5倍):</span> <span id="resOvertime">0.00 元</span></div>
+        <div class="result-row"><span>节假日加班费 (3倍):</span> <span id="resHoliday">0.00 元</span></div>
+        <div class="result-row"><span>夜班补贴:</span> <span id="resNight">0.00 元</span></div>
+        <div class="result-row total"><span>最终应发工资:</span> <span class="total-val" id="resTotal">0.00 元</span></div>
+    </div>
+</div>
+
+<script>
+    function calculateSalary() {
+        // 获取输入值，若为空则默认为0
+        let N = parseFloat(document.getElementById('baseSalary').value) || 0;
+        let adminDays = parseFloat(document.getElementById('adminDays').value) || 0;
+        let workDays = parseFloat(document.getElementById('workDays').value) || 0;
+        let nightDays = parseFloat(document.getElementById('nightDays').value) || 0;
+        let holidayDays = parseFloat(document.getElementById('holidayDays').value) || 0;
+
+        if (N === 0 || adminDays === 0) {
+            alert("请先输入底薪和当月行政天数！");
+            return;
+        }
+
+        // 计算时薪 (底薪 ÷ (行政天数 × 8小时))
+        let standardMonthlyHours = adminDays * 8;
+        let hourlyRate = N / standardMonthlyHours;
+
+        // 1. 底薪计算：达到行政班次拿全额底薪 N
+        let finalBase = (workDays >= adminDays) ? N : (workDays * 8 * hourlyRate);
+
+        // 2. 平时加班费：每天固定多上2小时，按1.5倍算
+        let overtimePay = workDays * 2 * hourlyRate * 1.5;
+
+        // 3. 节假日工资：当天8小时算3倍工资
+        let holidayPay = holidayDays * (hourlyRate * 8) * 3;
+
+        // 4. 夜班补贴：每晚 50 元
+        let nightSubsidy = nightDays * 50;
+
+        // 总计
+        let total = finalBase + overtimePay + holidayPay + nightSubsidy;
+
+        // 渲染结果
+        document.getElementById('resHourly').innerText = hourlyRate.toFixed(2) + " 元";
+        document.getElementById('resBase').innerText = finalBase.toFixed(2) + " 元";
+        document.getElementById('resOvertime').innerText = overtimePay.toFixed(2) + " 元";
+        document.getElementById('resHoliday').innerText = holidayPay.toFixed(2) + " 元";
+        document.getElementById('resNight').innerText = nightSubsidy.toFixed(2) + " 元";
+        document.getElementById('resTotal').innerText = total.toFixed(2) + " 元";
+        
+        // 显示结果区域
+        document.getElementById('resultBox').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
+
+
